@@ -38,7 +38,12 @@ def visualise(puzzle):
 
 
 
-
+def check_position(puzzle, x, y, n):
+    row = puzzle[y]
+    column = [row[x] for row in puzzle]
+    i = (x // 3) * 3
+    j = (y // 3) * 3
+    section = 
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
