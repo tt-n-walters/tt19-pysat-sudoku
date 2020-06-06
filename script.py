@@ -1,6 +1,6 @@
 # heuristics
 # backtracking
-
+import timeit
 
 # Read the file of puzzles
 def read_puzzles():
@@ -57,17 +57,22 @@ def solve(puzzle):
                 for n in range(1, 10):
                     if check_position(puzzle, x, y, n):
                         puzzle[y][x] = n
-                        visualise(puzzle)
                         solve(puzzle)
                         # Time to undo the heuristic
                         puzzle[y][x] = 0
                 # Here be backtracking
                 return
     # Means solved sudoku
-    input()
+    # visualise(puzzle)
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
     puzzle = convert_puzzle(puzzles[42])
     
-    solve(puzzle)
+    start_time = timeit.default_timer()
+    for _ in range(500):
+        solve(puzzle)
+
+    end_time = timeit.default_timer()
+    time_taken = end_time - start_time
+    print(f"Took {time_taken} seconds to complete 100.\nAverage of {time_taken / 500} seconds per solve.")
