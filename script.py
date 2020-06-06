@@ -26,6 +26,7 @@ def visualise(puzzle):
     output = str()
     for row in puzzle:
         for n in row:
+            output += " "
             if n > 0:
                 output += str(n)
             else:
