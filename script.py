@@ -23,16 +23,20 @@ def convert_puzzle(string):
 
 # Visualisation of the puzzle
 def visualise(puzzle):
-    output = str()
+    output = "+------+-----+------+\n"
     for row in puzzle:
+        output += "|"
         for n in row:
             output += " "
             if n > 0:
                 output += str(n)
             else:
                 output += " "
-        output += "\n"
+        output += " |\n"
+    output += "+------+-----+------+"
     print(output)
+
+
 
 
 
