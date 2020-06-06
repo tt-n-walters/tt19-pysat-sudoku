@@ -49,6 +49,14 @@ def check_position(puzzle, x, y, n):
     return not n in row + column + section
 
 
+def solve(puzzle):
+    for y in range(9):
+        for x in range(9):
+            number = puzzle[y][x]
+            if number == 0:
+                
+
+
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
