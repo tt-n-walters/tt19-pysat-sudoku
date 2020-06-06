@@ -1,6 +1,8 @@
 # heuristics
 # backtracking
+
 import timeit
+import itertools
 
 # Read the file of puzzles
 def read_puzzles():
@@ -50,29 +52,24 @@ def check_position(puzzle, x, y, n):
 
 
 def solve(puzzle):
-    for y in range(9):
-        for x in range(9):
-            number = puzzle[y][x]
-            if number == 0:
-                for n in range(1, 10):
-                    if check_position(puzzle, x, y, n):
-                        puzzle[y][x] = n
-                        solve(puzzle)
-                        # Time to undo the heuristic
-                        puzzle[y][x] = 0
-                # Here be backtracking
-                return
+    for x, y in itertools.product(range(9), repeat=2):
+        number = puzzle[y][x]
+        if number == 0:
+            for n in range(1, 10):
+                if check_position(puzzle, x, y, n):
+                    puzzle[y][x] = n
+                    yield from solve(puzzle)
+                    # Time to undo the heuristic
+                    puzzle[y][x] = 0
+            # Here be backtracking
+            return
     # Means solved sudoku
-    # visualise(puzzle)
+    visualise(puzzle)
+    yield
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
     puzzle = convert_puzzle(puzzles[42])
-    
-    start_time = timeit.default_timer()
-    for _ in range(500):
-        solve(puzzle)
+    visualise(puzzle)
 
-    end_time = timeit.default_timer()
-    time_taken = end_time - start_time
-    print(f"Took {time_taken} seconds to complete 100.\nAverage of {time_taken / 500} seconds per solve.")
+    next(solve(puzzle))
