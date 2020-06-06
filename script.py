@@ -44,12 +44,15 @@ def check_position(puzzle, x, y, n):
     i = (x // 3) * 3
     j = (y // 3) * 3
     section = [z for row in puzzle[j : j+3] for z in row[i : i+3]]
-
     
+    return not n in row and not n in column and not n in section
+    return not n in row + column + section
+
+
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
     puzzle = convert_puzzle(puzzles[42])
     visualise(puzzle)
 
-    check_position(puzzle, 6, 6, 1)
+    print(check_position(puzzle, 2, 3, 6))
