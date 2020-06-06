@@ -37,7 +37,5 @@ def visualise(puzzle):
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
-    puzzle = puzzles[42]
-
-    print(puzzle)
-    print(convert_puzzle(puzzle))
+    puzzle = convert_puzzle(puzzles[42])
+    visualise(puzzle)
