@@ -54,13 +54,20 @@ def solve(puzzle):
         for x in range(9):
             number = puzzle[y][x]
             if number == 0:
-                
-
-
+                for n in range(1, 10):
+                    if check_position(puzzle, x, y, n):
+                        puzzle[y][x] = n
+                        visualise(puzzle)
+                        solve(puzzle)
+                        # Time to undo the heuristic
+                        puzzle[y][x] = 0
+                # Here be backtracking
+                return
+    # Means solved sudoku
+    input()
 
 if __name__ == "__main__":
     puzzles = read_puzzles()
     puzzle = convert_puzzle(puzzles[42])
-    visualise(puzzle)
-
-    print(check_position(puzzle, 2, 3, 6))
+    
+    solve(puzzle)
