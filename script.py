@@ -15,14 +15,23 @@ def convert_puzzle(string):
     for i in range(9):
         row = []
         for j in range(i * 9, (i + 1) * 9):
-            n = string[j]
+            n = int(string[j])
             row.append(n)
         puzzle.append(row)
     return puzzle
 
 
 # Visualisation of the puzzle
-
+def visualise(puzzle):
+    output = str()
+    for row in puzzle:
+        for n in row:
+            if n > 0:
+                output += str(n)
+            else:
+                output += " "
+        output += "\n"
+    print(output)
 
 
 
